@@ -1,5 +1,4 @@
 package com.codewithmohsen.dummyviewtask
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,16 +36,6 @@ class SecondFragment : Fragment() {
             isFullScreen = !isFullScreen
             toggleHideyBar()
         }
-
-        val decorView = requireActivity().window.decorView
-        decorView.setOnSystemUiVisibilityChangeListener {
-            val height = decorView.height
-            Toast.makeText(
-                requireContext(),
-                "height dector: $height height view: ${view.height}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 
     /**
@@ -56,9 +45,11 @@ class SecondFragment : Fragment() {
         if (isFullScreen) {
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
             requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            view?.setPadding(0, getStatusAndTitleBarHeight(), 0, getNavigationBarHeight())
         } else {
             (requireActivity() as AppCompatActivity).supportActionBar?.show()
             requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            view?.setPadding(0, 0, 0, 0)
         }
         // BEGIN_INCLUDE (get_current_ui_flags)
         // The UI options currently enabled are represented by a bitfield.
@@ -79,6 +70,37 @@ class SecondFragment : Fragment() {
         newUiOptions = newUiOptions xor View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         requireActivity().window.decorView.systemUiVisibility = newUiOptions
         //END_INCLUDE (set_ui_flags)
+    }
+
+    private fun getStatusAndTitleBarHeight(): Int{
+
+        // status bar height
+        var statusBarHeight = 0
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            statusBarHeight = resources.getDimensionPixelSize(resourceId)
+        }
+
+        // action bar height
+        var actionBarHeight = 0
+        val styledAttributes =
+            requireActivity().theme.obtainStyledAttributes(intArrayOf(android.R.attr.actionBarSize))
+        actionBarHeight = styledAttributes.getDimension(0, 0f).toInt()
+        styledAttributes.recycle()
+
+        return statusBarHeight + actionBarHeight
+    }
+
+    private fun getNavigationBarHeight(): Int{
+
+        // navigation bar height
+        var navigationBarHeight = 0
+        val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            navigationBarHeight = resources.getDimensionPixelSize(resourceId)
+        }
+
+        return navigationBarHeight
     }
 
 }

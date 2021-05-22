@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SecondFragment"
-    android:background="@color/purple_200">
+    android:background="@color/purple_200"
+    android:fitsSystemWindows="false">
 
     <TextView
         android:id="@+id/textview_second"

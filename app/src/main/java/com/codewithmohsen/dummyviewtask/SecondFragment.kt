@@ -1,8 +1,10 @@
 package com.codewithmohsen.dummyviewtask
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -51,10 +53,13 @@ class SecondFragment : Fragment() {
      * Detects and toggles immersive mode.
      */
     fun toggleHideyBar() {
-        if(isFullScreen)
+        if (isFullScreen) {
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-        else
+            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        } else {
             (requireActivity() as AppCompatActivity).supportActionBar?.show()
+            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
         // BEGIN_INCLUDE (get_current_ui_flags)
         // The UI options currently enabled are represented by a bitfield.
         // getSystemUiVisibility() gives us that bitfield.

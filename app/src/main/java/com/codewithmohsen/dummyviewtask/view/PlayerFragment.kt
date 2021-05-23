@@ -1,5 +1,7 @@
 package com.codewithmohsen.dummyviewtask.view
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +39,7 @@ class PlayerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
@@ -45,6 +48,10 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
+            if(isFullScreen){
+                isFullScreen = !isFullScreen
+                toggleFullScreen()
+            }
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 

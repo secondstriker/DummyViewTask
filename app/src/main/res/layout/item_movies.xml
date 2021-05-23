@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.codewithmohsen.dummyviewtask.model.Movie" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/movieTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentStart="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.title}"
+                android:textColor="@color/purple_500"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="GodFather" />
+
+            <TextView
+                android:id="@+id/movieYearPublished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/movieTitle"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:layout_alignParentStart="true"
+                android:ellipsize="end"
+                android:textColor="@color/grayText"
+                android:maxLines="1"
+                android:text="@{item.yearPublished}"
+                tools:text="1972" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

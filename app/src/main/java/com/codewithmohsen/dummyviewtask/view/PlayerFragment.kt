@@ -6,10 +6,20 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.codewithmohsen.dummyviewtask.AppCoroutineDispatchers
 import com.codewithmohsen.dummyviewtask.R
+import com.codewithmohsen.dummyviewtask.adapter.MovieItemAdapter
+import com.codewithmohsen.dummyviewtask.databinding.ItemMoviesBinding
+import com.codewithmohsen.dummyviewtask.utils.autoCleared
+import com.codewithmohsen.dummyviewtask.vm.MoviesViewModel
 import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -40,14 +50,14 @@ class PlayerFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button_fullscreen).setOnClickListener {
             isFullScreen = !isFullScreen
-            toggleHideyBar()
+            toggleFullScreen()
         }
     }
 
     /**
      * Detects and toggles immersive mode.
      */
-    fun toggleHideyBar() {
+    private fun toggleFullScreen() {
         if (isFullScreen) {
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
             requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

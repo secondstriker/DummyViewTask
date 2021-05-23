@@ -9,18 +9,18 @@ object MovieDb {
             Movie(
                 1,
                 "The Godfather 1",
-                1972,
+                "1972",
                 "description of the godfather 1 movie"
             ),
             Movie(
                 2,
                 "Gladiator",
-                2000,
+                "2000",
                 "description for gladiator"
             ),
             Movie(3,
             "BraveHeart",
-            2003,
+            "2003",
             "description for braveheart")
         )
     }

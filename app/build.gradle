@@ -24,12 +24,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 }
 
@@ -55,4 +61,10 @@ dependencies {
     implementation Libs.dagger_android_support
     kapt Libs.dagger_android_processor
     kapt Libs.dagger2_compiler
+
+    //lifecycle
+    implementation AndroidX.lifecycle
+    implementation AndroidX.lifecycleLiveDataKTX
+    implementation AndroidX.lifecycleRuntime
+    implementation AndroidX.lifecycleCommon
 }
